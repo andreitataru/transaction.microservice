@@ -35,7 +35,43 @@ class TransactionController extends Controller
             //return error message
             return response()->json(['message' => 'addTransaction Failed' + $e], 409);
         }
+    }
 
+    public function getAllTransactions(Request $request){
+        return response()->json(['transactions' =>  Transaction::all()], 200);
+    }
+
+    public function getTransactionById($id)
+    {
+        try {
+            $transaction = Transaction::findOrFail($id);
+
+            return response()->json(['transaction' => $transaction], 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json(['message' => 'Transaction not found!'], 404);
+        }
+
+    }
+
+    public function getTransactionByUserId($id)
+    {
+        try {
+            $transactionsBuyer = Transaction::where('buyerId' , '=' , $id)->get();
+            $transactionsSeller = Transaction::where('sellerId' , '=' , $id)->get();
+
+            if (count($transactionsBuyer) > 0 || count($transactionsSeller) > 0){
+                return response()->json(['transactionsBuyer' => $transactionsBuyer,'transactionsSeller' => $transactionsSeller, ], 200);
+            }
+            else{
+                return response()->json(['message' => 'No transactions found with user id ' . $id], 404);
+            }
+
+        } catch (\Exception $e) {
+
+            return response()->json(['message' => 'Error'], 500);
+        }
 
     }
 }

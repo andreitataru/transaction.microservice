@@ -29,7 +29,10 @@ $router->group(['middleware' => 'cors'], function () use ($router) {
     // API route group
     $router->group(['prefix' => 'api'], function () use ($router) {
   
-      $router->post('addTransaction', 'TransactionController@addTransaction');
+      $router->post('addTransaction', 'TransactionController@addTransaction'); 
+      $router->get('getAllTransactions', 'TransactionController@getAllTransactions');
+      $router->get('getTransactionById/{id}', 'TransactionController@getTransactionById');
+      $router->get('getTransactionByUserId/{id}', 'TransactionController@getTransactionByUserId');
       
     });
 
