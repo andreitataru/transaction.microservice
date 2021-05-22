@@ -75,9 +75,11 @@ class TransactionController extends Controller
 
     }
 
-    public function getTransactionsByDate($request)
+    public function getTransactionsByDate(Request $request)
     {
-        //todas as transações com uma certa data
+        $transactions = Transaction::where('created_at', 'like', $request->date . "%")->get();
+        return response()->json(['transactions' => $transactions], 200);
+
     }
 
 }

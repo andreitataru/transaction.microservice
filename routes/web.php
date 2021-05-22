@@ -33,7 +33,7 @@ $router->group(['middleware' => 'cors'], function () use ($router) {
       $router->get('getAllTransactions', 'TransactionController@getAllTransactions');
       $router->get('getTransactionById/{id}', 'TransactionController@getTransactionById');
       $router->get('getTransactionByUserId/{id}', 'TransactionController@getTransactionByUserId');
-      $router->get('getTransactionsByDate', 'TransactionController@getTransactionsByDate');
+      $router->post('getTransactionsByDate', 'TransactionController@getTransactionsByDate');
       
     });
 
