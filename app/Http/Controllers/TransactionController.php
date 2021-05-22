@@ -74,4 +74,10 @@ class TransactionController extends Controller
         }
 
     }
+
+    public function getTransactionsByDate($request)
+    {
+        //todas as transações com uma certa data
+    }
+
 }
